@@ -29,117 +29,273 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    padding: 24px 16px;
+    background: #f7f5ed;
+    color: #172b3a;
+    font-family: "Avenir", "Trebuchet MS", sans-serif;
 }
 
 .game-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
+    width: min(800px, 100%);
+}
+
+.brand-logo {
+    display: block;
+    width: min(180px, 48vw);
+    height: auto;
 }
 
 .score-panel {
     display: flex;
-    justify-content: space-between;  /* Space between score and button */
+    justify-content: space-between;
     align-items: center;
-    width: 800px;
-    padding: 10px;
+    gap: 16px;
+    width: 100%;
+    padding: 12px 16px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(23, 43, 58, 0.12);
 }
 
-.timer {
-    flex: 0 1 auto;
-    font-size: 24px;
+.timer,
+.score {
+    flex: 0 0 auto;
+    font-size: 20px;
     font-weight: bold;
 }
 
 #game-container {
-    width: 800px;
-    height: 600px;
-    background-color: #e6f7ff;
-    border: 2px solid #333;
+    width: 100%;
+    height: min(600px, 62vh);
+    min-height: 320px;
+    background-color: #e8f6fc;
+    background-image:
+        radial-gradient(ellipse 32px 15px at 13% 12%, #fff 97%, transparent 100%),
+        radial-gradient(ellipse 40px 18px at 17% 11%, #fff 97%, transparent 100%),
+        radial-gradient(ellipse 26px 13px at 21% 13%, #fff 97%, transparent 100%),
+        radial-gradient(ellipse 29px 14px at 69% 18%, #fff 97%, transparent 100%),
+        radial-gradient(ellipse 39px 18px at 73% 17%, #fff 97%, transparent 100%),
+        radial-gradient(ellipse 25px 12px at 77% 19%, #fff 97%, transparent 100%);
+    border: 2px solid #2E9DF7;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
 }
 
+.game-scenery {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: min(48%, 40vw);
+    pointer-events: none;
+    z-index: 0;
+}
 
-#start-btn {
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
+.game-controls {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    min-height: 44px;
+    padding: 8px 14px;
+    background-color: #2E9DF7;
+    color: #102b3a;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: 700;
 }
 
-#start-btn:hover {
-    background-color: #45a049;
+button:hover {
+    background-color: #FFC907;
 }
 
-.score {
-    flex: 0 1 auto;  /* Don't grow, can shrink, auto basis */
-    font-size: 24px;
-    font-weight: bold;
+button:focus-visible,
+.water-drop:focus-visible {
+    outline: 3px solid #172b3a;
+    outline-offset: 3px;
 }
 
 .water-drop {
     position: absolute;
-    width: 60px;  /* increased from 40px */
-    height: 60px; /* increased from 40px */
-    background-color: #0099ff;
-    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    color: transparent;
+    font-size: 0;
     animation: dropFall linear forwards;
     transform-origin: center;
     cursor: pointer;
-    padding: 15px;  /* Add padding for larger click area */
-    margin: -15px;  /* Offset padding to maintain visual size */
-    transition: transform 0.1s ease;  /* Smooth hover effect */
+    transition: transform 0.1s ease;
+    z-index: 1;
+}
+
+.water-drop::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 68%;
+    height: 68%;
+    background-color: #2E9DF7;
+    border-radius: 50% 50% 50% 0;
+    content: "";
+    transform: translate(-50%, -50%) rotate(135deg);
+    pointer-events: none;
+}
+
+.water-drop::after {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(23, 43, 58, 0.6);
+    pointer-events: none;
 }
 
 .water-drop:hover {
-    transform: scale(1.1);  /* Slight grow effect on hover */
+    transform: scale(1.08);
+}
+
+.water-drop:hover,
+.bad-drop:hover {
+    background-color: transparent;
 }
 
 .bad-drop {
-    background-color: #ff4444;
+    background-color: transparent;
+}
+
+.bad-drop::before {
+    background-color: #F5402C;
+}
+
+.bad-drop::after {
+    content: "×";
 }
 
 .game-title {
-    color: #131313;
-    font-size: 48px;
-    margin-top: 0;
-    margin-bottom: 5px;  /* reduced from 20px */
+    color: #172b3a;
+    font-size: 40px;
+    margin: 0;
     text-align: center;
 }
 
 .game-tagline {
-    color: #666;
+    max-width: 620px;
+    color: #3f5967;
     font-size: 18px;
-    margin-bottom: 20px;
     text-align: center;
+    line-height: 1.4;
+}
+
+#game-message {
+    min-height: 24px;
+    color: #172b3a;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -12px;
+    width: 9px;
+    height: 14px;
+    animation: confettiFall 1.8s ease-in forwards;
+    pointer-events: none;
+    z-index: 2;
 }
 
 @keyframes dropFall {
     from {
-        transform: translateY(-20px);
+        transform: translateY(var(--drop-start));
     }
     to {
-        transform: translateY(600px);
+        transform: translateY(var(--fall-distance));
     }
 }
 
-@media (max-width: 850px) {
-    .game-wrapper, .score-panel, #game-container {
-        width: 95vw;
+@keyframes confettiFall {
+    to {
+        transform: translateY(620px) rotate(540deg);
+        opacity: 0;
     }
-    
+}
+
+@media (max-width: 520px) {
+    body {
+        align-items: flex-start;
+        padding: 18px 12px;
+    }
+
+    .game-wrapper {
+        gap: 12px;
+    }
+
+    .score-panel {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 18px;
+    }
+
+    .timer,
+    .score {
+        font-size: 18px;
+    }
+
+    .game-title {
+        font-size: 34px;
+    }
+
+    .game-tagline {
+        font-size: 16px;
+    }
+
     #game-container {
-        height: 70vh;
+        height: min(62vh, 560px);
+        min-height: 300px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .water-drop {
+        animation-name: dropFade;
+    }
+
+    .confetti-piece {
+        display: none;
+        animation: none;
+    }
+}
+
+@keyframes dropFade {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.4;
     }
 }

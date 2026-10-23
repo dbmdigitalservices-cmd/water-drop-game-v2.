@@ -8,15 +8,73 @@
 </head>
 <body>
     <div class="game-wrapper">
+        <img class="brand-logo" src="img/cw_logo-horizontal.png" alt="charity: water">
         <h1 class="game-title">Water Drop</h1>
-        <p class="game-tagline">Catch the good drops, avoid the bad ones!</p>
+        <p class="game-tagline">Click blue drops for +1. Avoid red drops (×) for −2. Reach 20 points in 30 seconds.</p>
         <div class="score-panel">
-            <div class="score">Score: <span id="score">0</span></div>
-            <div class="timer">Time: <span id="time">30</span>s</div>
-            <button id="start-btn">Start Game</button>
+            <div class="score">Score: <span id="score" aria-live="polite">0</span></div>
+            <div class="timer">Time: <span id="time" aria-live="off">30</span>s</div>
+            <div class="game-controls">
+                <button id="start-btn" type="button">Start Game</button>
+                <button id="reset-btn" type="button">Reset</button>
+            </div>
         </div>
-        
-        <div id="game-container">
+        <p id="game-message" role="status" aria-live="polite">Ready when you are.</p>
+        <div id="game-container" role="group" aria-label="Water drop game area">
+            <svg class="game-scenery" viewBox="0 0 800 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M0 92C105 42 188 80 275 112c85 31 149 2 236-28 91-31 177-8 289 29v187H0Z" fill="#b9dca5" />
+                <path d="M0 146c111-44 204-20 292 10 106 36 180 13 266-14 91-28 166-8 242 19v139H0Z" fill="#a9d28f" />
+                <path d="M423 300c-22-32-53-51-40-76 15-27 49-37 29-60-12-14-19-25-17-42" fill="none" stroke="#d7c295" stroke-width="42" stroke-linecap="round" />
+                <path d="M423 300c-22-32-53-51-40-76 15-27 49-37 29-60-12-14-19-25-17-42" fill="none" stroke="#ead9ad" stroke-width="34" stroke-linecap="round" />
+
+                <g aria-hidden="true">
+                    <rect x="45" y="99" width="12" height="94" rx="5" fill="#9c704d" />
+                    <circle cx="51" cy="86" r="38" fill="#74ad70" />
+                    <circle cx="31" cy="103" r="23" fill="#83b97a" />
+                    <circle cx="72" cy="105" r="24" fill="#68a566" />
+                    <rect x="741" y="100" width="12" height="98" rx="5" fill="#9c704d" />
+                    <circle cx="747" cy="87" r="38" fill="#74ad70" />
+                    <circle cx="726" cy="104" r="23" fill="#83b97a" />
+                    <circle cx="768" cy="105" r="24" fill="#68a566" />
+                </g>
+
+                <g>
+                    <rect x="104" y="163" width="68" height="52" rx="3" fill="#f3b77d" />
+                    <path d="m95 165 43-37 44 37Z" fill="#d77d5d" />
+                    <rect x="131" y="184" width="16" height="31" rx="2" fill="#916b56" />
+                    <rect x="111" y="175" width="12" height="12" fill="#d8edf0" />
+                    <rect x="153" y="175" width="12" height="12" fill="#d8edf0" />
+
+                    <rect x="215" y="184" width="58" height="43" rx="3" fill="#f1d783" />
+                    <path d="m207 186 37-31 38 31Z" fill="#bb7458" />
+                    <rect x="239" y="202" width="13" height="25" rx="2" fill="#916b56" />
+                    <rect x="220" y="194" width="10" height="10" fill="#d8edf0" />
+                    <rect x="258" y="194" width="10" height="10" fill="#d8edf0" />
+
+                    <rect x="560" y="180" width="62" height="47" rx="3" fill="#e8a2a0" />
+                    <path d="m552 182 39-34 39 34Z" fill="#ad6d62" />
+                    <rect x="584" y="202" width="14" height="25" rx="2" fill="#916b56" />
+                    <rect x="566" y="191" width="10" height="10" fill="#d8edf0" />
+                    <rect x="605" y="191" width="10" height="10" fill="#d8edf0" />
+
+                    <rect x="659" y="158" width="69" height="54" rx="3" fill="#a8c8dd" />
+                    <path d="m650 160 44-37 44 37Z" fill="#d77d5d" />
+                    <rect x="686" y="181" width="16" height="31" rx="2" fill="#916b56" />
+                    <rect x="666" y="170" width="12" height="12" fill="#d8edf0" />
+                    <rect x="709" y="170" width="12" height="12" fill="#d8edf0" />
+                </g>
+
+                <g>
+                    <path d="M374 157v61m52-61v61" fill="none" stroke="#8c6548" stroke-width="8" stroke-linecap="round" />
+                    <path d="m360 163 40-37 40 37Z" fill="#a96f4f" />
+                    <path d="m368 160 32-29 32 29Z" fill="#c98b60" />
+                    <path d="M400 163v37" stroke="#80634b" stroke-width="3" />
+                    <path d="M390 188h20l-3 19h-14Z" fill="#8bb9c3" stroke="#6b8e91" stroke-width="2" />
+                    <ellipse cx="400" cy="219" rx="34" ry="10" fill="#b28b64" />
+                    <path d="M369 215v-25m62 25v-25" stroke="#9c7656" stroke-width="5" />
+                    <path d="M369 193c7-9 15-9 22 0m18 0c7-9 15-9 22 0" fill="none" stroke="#d0ad82" stroke-width="4" />
+                </g>
+            </svg>
         </div>
     </div>
     
