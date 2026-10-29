@@ -10,16 +10,30 @@
     <div class="game-wrapper">
         <img class="brand-logo" src="img/cw_logo-horizontal.png" alt="charity: water">
         <h1 class="game-title">Water Drop</h1>
-        <p class="game-tagline">Click blue drops for +1. Avoid red drops (×) for −2. Reach 20 points in 30 seconds.</p>
+            <p class="game-tagline">Click blue drops for +1. Avoid red drops (×) for −2. Reach your target before time runs out.</p>
         <div class="score-panel">
             <div class="score">Score: <span id="score" aria-live="polite">0</span></div>
             <div class="timer">Time: <span id="time" aria-live="off">30</span>s</div>
+                <label class="difficulty-control" for="difficulty">Difficulty
+                    <select id="difficulty" aria-describedby="round-goal">
+                        <option value="easy">Easy</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </label>
+                <p id="round-goal" class="round-goal">Mode: <span id="mode-display">Normal</span> · Target: <span id="target">20</span> points</p>
             <div class="game-controls">
                 <button id="start-btn" type="button">Start Game</button>
                 <button id="reset-btn" type="button">Reset</button>
             </div>
         </div>
         <p id="game-message" role="status" aria-live="polite">Ready when you are.</p>
+            <p id="milestone-message" class="milestone-message" role="status" aria-live="polite" aria-atomic="true"></p>
+            <label class="sound-control" for="sound-toggle">
+                <input id="sound-toggle" type="checkbox" checked aria-describedby="sound-note">
+                Sound On/Off
+            </label>
+            <p id="sound-note" class="sound-note">Toggle sound effects for clean drops and wins.</p>
         <div id="game-container" role="group" aria-label="Water drop game area">
             <svg class="game-scenery" viewBox="0 0 800 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                 <path d="M0 92C105 42 188 80 275 112c85 31 149 2 236-28 91-31 177-8 289 29v187H0Z" fill="#b9dca5" />
@@ -76,8 +90,15 @@
                 </g>
             </svg>
         </div>
+        <footer class="mission-footer">
+            <p>charity: water works to bring clean and safe water to communities around the world. Game points are symbolic only; they do not represent donations or water delivered.</p>
+            <p><a href="https://www.charitywater.org/" target="_blank" rel="noopener noreferrer">Learn about charity: water</a> · <a href="https://www.charitywater.org/donate" target="_blank" rel="noopener noreferrer">Visit the official donation page</a></p>
+        </footer>
     </div>
     
+    <audio id="collection-sound" src="cartoon_music-puzzle-game-correct-answer-508718.mp3" preload="auto"></audio>
+    <audio id="win-sound" src="freesound_community-game-over-arcade-6435.mp3" preload="auto"></audio>
+    <audio id="error-sound" src="lesiakower-error-mistake-sound-effect-incorrect-answer-437420.mp3" preload="auto"></audio>
     <script src="script.js"></script>
 </body>
 </html>
